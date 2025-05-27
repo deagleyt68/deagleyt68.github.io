@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rollercoindeki Madenci Gücü Hesaplayıcı</title>  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      background: #0f1624;
+      border-radius: 15px;
+      padding: 30px 40px;
+      box-shadow: 0 0 20px #4ecca3aa;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 800;
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #4ecca3;
+      text-shadow: 0 0 6px #4ecca3cc;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: 600;
+      font-size: 18px;
+      color: #a8dadc;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    input[type="number"], input[type="text"], select {
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      background: #16213e;
+      color: #eee;
+      box-shadow: inset 0 0 5px #0009;
+      transition: box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    input[type="number"] {
+      flex: 2;
+    }
+
+    select.unit-select {
+      flex: 1;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 10px #4ecca3;
+      background: #1a2238;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 14px 20px;
+      width: 100%;
+      font-size: 18px;
+      background-color: #4ecca3;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #0f1624;
+      font-weight: 700;
+      box-shadow: 0 0 12px #4ecca3cc;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3da782;
+    }
+
+    .result {
+      margin-top: 28px;
+      font-weight: 700;
+      font-size: 18px;
+      text-align: center;
+      color: #f1faee;
+      white-space: pre-line;
+      text-shadow: 0 0 8px #4ecca3cc;
+    }
+
+    select option {
+      padding-left: 30px;
+      background-repeat: no-repeat;
+      background-position: 5px center;
+      background-size: 20px 20px;
+    }
+
+    option[value="rollerToken"] { background-image: url('https://img.icons8.com/color/48/roller-skate.png'); }
+    option[value="xrp"] { background-image: url('https://cryptologos.cc/logos/xrp-xrp-logo.png'); }
+    option[value="tron"] { background-image: url('https://cryptologos.cc/logos/tron-trx-logo.png'); }
+    option[value="doge"] { background-image: url('https://cryptologos.cc/logos/dogecoin-doge-logo.png'); }
+    option[value="bnb"] { background-image: url('https://cryptologos.cc/logos/binance-coin-bnb-logo.png'); }
+    option[value="eth"] { background-image: url('https://cryptologos.cc/logos/ethereum-eth-logo.png'); }
+    option[value="btc"] { background-image: url('https://cryptologos.cc/logos/bitcoin-btc-logo.png'); }
+    option[value="lite"] { background-image: url('https://cryptologos.cc/logos/litecoin-ltc-logo.png'); }
+    option[value="sol"] { background-image: url('https://cryptologos.cc/logos/solana-sol-logo.png'); }
+    option[value="pol"] { background-image: url('https://cryptologos.cc/logos/polkadot-new-dot-logo.png'); }
+
+    .ref-box {
+      margin-top: 25px;
+      padding: 15px;
+      border: 2px dashed #4ecca3;
+      border-radius: 10px;
+      text-align: center;
+      background: #16213e;
+      box-shadow: 0 0 10px #4ecca366;
+    }
+
+    .ref-box a {
+      color: #4ecca3;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Rollercoindeki Madenci Hesaplayıcı</h1>
+
+    <label>Network Power:</label>
+    <div class="input-row">
+      <input type="number" id="networkPowerValue" min="0" />
+      <select id="networkPowerUnit" class="unit-select">
+        <option value="zh">ZH</option>
+        <option value="eh">EH</option>
+        <option value="ph">PH</option>
+        <option value="th">TH</option>
+        <option value="gh" selected>GH</option>
+      </select>
+    </div>
+
+    <label>My Power:</label>
+    <div class="input-row">
+      <input type="number" id="myPowerValue" min="0" />
+      <select id="myPowerUnit" class="unit-select">
+        <option value="zh">ZH</option>
+        <option value="eh">EH</option>
+        <option value="ph">PH</option>
+        <option value="th">TH</option>
+        <option value="gh" selected>GH</option>
+      </select>
+    </div>
+
+    <label for="blockInput">Block:</label>
+    <input type="text" id="blockInput" placeholder="Blok değeri girin..." />
+
+    <label for="coinSelect">Coin Seçimi:</label>
+    <select id="coinSelect">
+      <option value="rollerToken">RollerToken</option>
+      <option value="xrp">Ripple XRP</option>
+      <option value="tron">Tron</option>
+      <option value="doge">Dogecoin</option>
+      <option value="bnb">Binance Coin (BNB)</option>
+      <option value="eth">Ethereum</option>
+      <option value="btc">Bitcoin</option>
+      <option value="lite">Litecoin</option>
+      <option value="sol">Solana</option>
+      <option value="pol">Polkadot</option>
+    </select>
+
+    <button onclick="calculatePower()">Hesapla</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="ref-box">
+      <p>Rollercoin'e Katılmak İçin:</p>
+      <a href="https://rollercoin.com/?r=kpnyjnn7" target="_blank" rel="noopener noreferrer">https://rollercoin.com/?r=kpnyjnn7</a>
+    </div>
+    
+    <div class="footer">
+      © 2025 Muhammed Emin İçli
+    </div>
+  </div>
+
+  <script>
+    const unitMultiplier = {
+      gh: 1,
+      th: 1e3,
+      ph: 1e6,
+      eh: 1e9,
+      zh: 1e12
+    };
+
+    function calculatePower() {
+      const netVal = parseFloat(document.getElementById("networkPowerValue").value.replace(/\./g, '').replace(',', '.')) || 0;
+      const netUnit = document.getElementById("networkPowerUnit").value;
+
+      const myVal = parseFloat(document.getElementById("myPowerValue").value.replace(/\./g, '').replace(',', '.')) || 0;
+      const myUnit = document.getElementById("myPowerUnit").value;
+
+      const block = document.getElementById("blockInput").value.trim();
+      const coin = document.getElementById("coinSelect").value;
+
+      // Güçleri GH birimine çevir
+      const networkPower = netVal * unitMultiplier[netUnit];
+      const myPower = myVal * unitMultiplier[myUnit];
+
+      if (networkPower === 0 || myPower === 0) {
+        document.getElementById("result").textContent = "Lütfen network gücü ve kendi gücünüzü doğru giriniz.";
+        return;
+      }
+
+      const powerRatio = myPower / networkPower;
+
+      const blockNumber = parseInt(block, 10);
+      if (isNaN(blockNumber) || blockNumber <= 0) {
+        document.getElementById("result").textContent = "Lütfen geçerli bir blok değeri girin.";
+        return;
+      }
+
+      // Örnek blok başı coin ödülleri (tahmini)
+      const coinBlockRewards = {
+        rollerToken: 10,
+        xrp: 0.05,
+        tron: 0.1,
+        doge: 0.2,
+        bnb: 0.03,
+        eth: 0.01,
+        btc: 0.001,
+        lite: 0.02,
+        sol: 0.015,
+        pol: 0.012
+      };
+
+      const rewardPerBlock = coinBlockRewards[coin] || 0;
+
+      const estimatedReward = powerRatio * rewardPerBlock * blockNumber;
+
+      document.getElementById("result").textContent = 
+        `Tahmini Kazanç:\n` +
+        `Coin: ${coin}\n` +
+        `Blok Sayısı: ${blockNumber}\n` +
+        `Toplam Kazanç: ${estimatedReward.toFixed(6)} ${coin.toUpperCase()}`;
+   
