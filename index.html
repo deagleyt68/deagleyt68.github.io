@@ -17,7 +17,6 @@
       padding: 40px 20px;
       box-sizing: border-box;
     }
-
     .container {
       background: #0f1624;
       border-radius: 15px;
@@ -26,7 +25,6 @@
       max-width: 500px;
       width: 100%;
     }
-
     h1 {
       text-align: center;
       font-weight: 800;
@@ -35,7 +33,6 @@
       color: #4ecca3;
       text-shadow: 0 0 6px #4ecca3cc;
     }
-
     label {
       display: block;
       margin-top: 18px;
@@ -43,13 +40,11 @@
       font-size: 18px;
       color: #a8dadc;
     }
-
     .input-row {
       display: flex;
       gap: 10px;
       margin-top: 6px;
     }
-
     input[type="number"], input[type="text"], select {
       padding: 10px 12px;
       border-radius: 6px;
@@ -61,21 +56,17 @@
       transition: box-shadow 0.3s ease;
       box-sizing: border-box;
     }
-
     input[type="number"] {
       flex: 2;
     }
-
     select.unit-select {
       flex: 1;
     }
-
     input:focus, select:focus {
       outline: none;
       box-shadow: 0 0 10px #4ecca3;
       background: #1a2238;
     }
-
     button {
       margin-top: 30px;
       padding: 14px 20px;
@@ -90,11 +81,9 @@
       box-shadow: 0 0 12px #4ecca3cc;
       transition: background-color 0.3s ease;
     }
-
     button:hover {
       background-color: #3da782;
     }
-
     .result {
       margin-top: 28px;
       font-weight: 700;
@@ -104,14 +93,12 @@
       white-space: pre-line;
       text-shadow: 0 0 8px #4ecca3cc;
     }
-
     select option {
       padding-left: 30px;
       background-repeat: no-repeat;
       background-position: 5px center;
       background-size: 20px 20px;
     }
-
     option[value="rollerToken"] { background-image: url('https://img.icons8.com/color/48/roller-skate.png'); }
     option[value="xrp"] { background-image: url('https://cryptologos.cc/logos/xrp-xrp-logo.png'); }
     option[value="tron"] { background-image: url('https://cryptologos.cc/logos/tron-trx-logo.png'); }
@@ -122,7 +109,6 @@
     option[value="lite"] { background-image: url('https://cryptologos.cc/logos/litecoin-ltc-logo.png'); }
     option[value="sol"] { background-image: url('https://cryptologos.cc/logos/solana-sol-logo.png'); }
     option[value="pol"] { background-image: url('https://cryptologos.cc/logos/polkadot-new-dot-logo.png'); }
-
     .ref-box {
       margin-top: 25px;
       padding: 15px;
@@ -132,14 +118,12 @@
       background: #16213e;
       box-shadow: 0 0 10px #4ecca366;
     }
-
     .ref-box a {
       color: #4ecca3;
       font-weight: bold;
       text-decoration: none;
       font-size: 18px;
     }
-
     .footer {
       margin-top: 20px;
       text-align: center;
@@ -160,7 +144,7 @@
         <option value="eh">EH</option>
         <option value="ph">PH</option>
         <option value="th">TH</option>
-        <option value="gh">GH</option>
+        <option value="gh" selected>GH</option>
       </select>
     </div>
 
@@ -172,7 +156,7 @@
         <option value="eh">EH</option>
         <option value="ph">PH</option>
         <option value="th">TH</option>
-        <option value="gh">GH</option>
+        <option value="gh" selected>GH</option>
       </select>
     </div>
 
@@ -199,9 +183,9 @@
 
     <div class="ref-box">
       <p>Rollercoin'e Katılmak İçin:</p>
-      <a href="https://rollercoin.com/?r=kpnyjnn7" target="_blank">https://rollercoin.com/?r=kpnyjnn7</a>
+      <a href="https://rollercoin.com/?r=kpnyjnn7" target="_blank" rel="noopener noreferrer">https://rollercoin.com/?r=kpnyjnn7</a>
     </div>
-    
+
     <div class="footer">
       © 2025 Muhammed Emin İçli
     </div>
@@ -211,7 +195,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4125077608102444"
      crossorigin="anonymous"></script>
   <ins class="adsbygoogle"
-       style="display:block"
+       style="display:block; margin: 20px auto;"
        data-ad-client="ca-pub-4125077608102444"
        data-ad-slot="1234567890"
        data-ad-format="auto"
@@ -240,7 +224,6 @@
       const block = document.getElementById("blockInput").value.trim();
       const coin = document.getElementById("coinSelect").value;
 
-      // Burada basit bir örnek hesaplama var, istersen bunu detaylandırabiliriz
       const netPower = netVal * unitMultiplier[netUnit];
       const myPower = myVal * unitMultiplier[myUnit];
 
@@ -251,8 +234,29 @@
 
       const share = myPower / netPower;
 
-      // Örnek basit kazanç hesabı (kendi mantığına göre değiştirilebilir)
-      const dailyReward = 1000; // Örnek sabit günlük ödül
+      // Günlük ödüller (örnek değerler, değiştirilebilir)
+      const dailyRewards = {
+        rollerToken: 1000,
+        xrp: 50,
+        tron: 70,
+        doge: 60,
+        bnb: 40,
+        eth: 30,
+        btc: 10,
+        lite: 80,
+        sol: 90,
+        pol: 20
+      };
+
+      const dailyReward = dailyRewards[coin] || 0;
+
       const myDailyReward = dailyReward * share;
 
-      document.getElementById("result
+      document.getElementById("result").textContent =
+        `Seçilen Coin: ${coin.toUpperCase()}\n` +
+        `Günlük Tahmini Ödül: ${myDailyReward.toFixed(4)} ${coin.toUpperCase()}\n` +
+        `Blok: ${block ? block : "Belirtilmedi"}`;
+    }
+  </script>
+</body>
+</html>
