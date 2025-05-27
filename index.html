@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rollercoindeki Madenci Gücü Hesaplayıcı</title>  
+  <title>Rollercoindeki Madenci Güç Hesaplayıcı</title>  
   <style>
     body {
       margin: 0;
@@ -160,7 +160,7 @@
         <option value="eh">EH</option>
         <option value="ph">PH</option>
         <option value="th">TH</option>
-        <option value="gh" selected>GH</option>
+        <option value="gh">GH</option>
       </select>
     </div>
 
@@ -172,7 +172,7 @@
         <option value="eh">EH</option>
         <option value="ph">PH</option>
         <option value="th">TH</option>
-        <option value="gh" selected>GH</option>
+        <option value="gh">GH</option>
       </select>
     </div>
 
@@ -199,13 +199,27 @@
 
     <div class="ref-box">
       <p>Rollercoin'e Katılmak İçin:</p>
-      <a href="https://rollercoin.com/?r=kpnyjnn7" target="_blank" rel="noopener noreferrer">https://rollercoin.com/?r=kpnyjnn7</a>
+      <a href="https://rollercoin.com/?r=kpnyjnn7" target="_blank">https://rollercoin.com/?r=kpnyjnn7</a>
     </div>
     
     <div class="footer">
       © 2025 Muhammed Emin İçli
     </div>
   </div>
+
+  <!-- Google AdSense Reklam Kodu Başlangıcı -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4125077608102444"
+     crossorigin="anonymous"></script>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4125077608102444"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  <!-- Google AdSense Reklam Kodu Bitişi -->
 
   <script>
     const unitMultiplier = {
@@ -226,44 +240,19 @@
       const block = document.getElementById("blockInput").value.trim();
       const coin = document.getElementById("coinSelect").value;
 
-      // Güçleri GH birimine çevir
-      const networkPower = netVal * unitMultiplier[netUnit];
+      // Burada basit bir örnek hesaplama var, istersen bunu detaylandırabiliriz
+      const netPower = netVal * unitMultiplier[netUnit];
       const myPower = myVal * unitMultiplier[myUnit];
 
-      if (networkPower === 0 || myPower === 0) {
-        document.getElementById("result").textContent = "Lütfen network gücü ve kendi gücünüzü doğru giriniz.";
+      if (netPower === 0) {
+        document.getElementById("result").textContent = "Network Power sıfır olamaz!";
         return;
       }
 
-      const powerRatio = myPower / networkPower;
+      const share = myPower / netPower;
 
-      const blockNumber = parseInt(block, 10);
-      if (isNaN(blockNumber) || blockNumber <= 0) {
-        document.getElementById("result").textContent = "Lütfen geçerli bir blok değeri girin.";
-        return;
-      }
+      // Örnek basit kazanç hesabı (kendi mantığına göre değiştirilebilir)
+      const dailyReward = 1000; // Örnek sabit günlük ödül
+      const myDailyReward = dailyReward * share;
 
-      // Örnek blok başı coin ödülleri (tahmini)
-      const coinBlockRewards = {
-        rollerToken: 10,
-        xrp: 0.05,
-        tron: 0.1,
-        doge: 0.2,
-        bnb: 0.03,
-        eth: 0.01,
-        btc: 0.001,
-        lite: 0.02,
-        sol: 0.015,
-        pol: 0.012
-      };
-
-      const rewardPerBlock = coinBlockRewards[coin] || 0;
-
-      const estimatedReward = powerRatio * rewardPerBlock * blockNumber;
-
-      document.getElementById("result").textContent = 
-        `Tahmini Kazanç:\n` +
-        `Coin: ${coin}\n` +
-        `Blok Sayısı: ${blockNumber}\n` +
-        `Toplam Kazanç: ${estimatedReward.toFixed(6)} ${coin.toUpperCase()}`;
-   
+      document.getElementById("result
